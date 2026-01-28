@@ -1,88 +1,702 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<!-- Adicionado scroll-pt-24 para compensar a altura do menu fixo ao clicar nos links -->
+<html lang="pt-BR" class="scroll-smooth scroll-pt-24">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CT Conectados</title>
-  <link rel="stylesheet" href="css/index.css">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO e Metadados -->
+    <title>CT Conectados | Sua Melhor Versão em Uberaba</title>
+    <meta name="description" content="O maior Centro de Treinamento de Uberaba. Cross, Musculação, Hyrox, Kids e muito mais. Agende sua aula experimental grátis!">
+    <meta name="keywords" content="Cross Training, Academia Uberaba, Musculação, Hyrox, Fitness, CT Conectados">
+    <!-- AUTOR ATUALIZADO -->
+    <meta name="author" content="Draft Hub">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ctconectados.com.br/">
+    <meta property="og:title" content="CT Conectados | Treine do seu jeito">
+    <meta property="og:description" content="Venha conhecer a comunidade que mais cresce em Uberaba. 1ª Aula Grátis!">
+    <meta property="og:image" content="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyOMnN5vCa0mguT5jSvTb8mseozue8UuJcdEmjqNl2xb4FdGv4JCsRJHfxfMIOH6-ni1ZoafrjJz7OMtrqTS1BejwcBkar4OtZKnnrv1j1USDkOtwdFnnAhlC4VkOmrg12MMbfUfg=s680-w680-h510-rw">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/djtzo48aj/image/upload/v1768869677/logo_conectados.png">
+
+    <!-- ÁREA DE RASTREAMENTO (GOOGLE ANALYTICS & META PIXEL) -->
+    <!-- Cole o código do Google Analytics (G-XXXXXXXX) aqui -->
+    
+    <!-- Cole o código do Meta Pixel aqui -->
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Ícones Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                fontFamily: {
+                    sans: ['ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                },
+                extend: {
+                    colors: {
+                        orange: {
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Ajustes visuais */
+        body { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        ::selection { background-color: #f97316; color: white; }
+        .lucide { vertical-align: middle; }
+
+        /* Classes para animação de entrada (Scroll Reveal) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Ajuste para Parallax em mobile */
+        @media (max-width: 768px) {
+            .bg-fixed { background-attachment: scroll; }
+        }
+    </style>
 </head>
-<body>
+<body class="font-sans text-gray-900 antialiased selection:bg-orange-500 selection:text-white relative">
 
-  <header class="hero-index">
-    <div class="overlay">
-      <img src="img/logo_conectatos_2-removebg-preview.png" class="logo-main" alt="CT Conectados">
-      <h1>Conecte corpo e mente</h1>
-      <p>Treinos inteligentes, para todas as idades.</p>
-      <div class="buttons">
-        <a href="modalidades.html" class="btn btn-primary">Ver Modalidades</a>
-        <a href="https://forms.gle/yh9QAu854FFdYRUT7" class="btn btn-secondary">Agendar Aula</a>
-      </div>
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-5">
+        <div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <!-- LOGO NAV ATUALIZADA (Sempre visível) -->
+                <img src="https://res.cloudinary.com/dgt5d9xfq/image/upload/v1769566312/logo_conectatos_2_919585.png" alt="CT Conectados Logo" class="h-14 md:h-16 w-auto object-contain drop-shadow-lg">
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="text-white hover:text-orange-500 font-medium transition-colors text-sm uppercase tracking-wider">Início</a>
+                <a href="#modalidades" class="text-white hover:text-orange-500 font-medium transition-colors text-sm uppercase tracking-wider">Modalidades</a>
+                <a href="#sobre" class="text-white hover:text-orange-500 font-medium transition-colors text-sm uppercase tracking-wider">O CT</a>
+                <!-- Botão Navbar -->
+                <a href="#contato" class="bg-orange-600 hover:bg-orange-700 text-white px-6 py-2.5 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-orange-600/30 text-sm uppercase">
+                    Aula Experimental
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-btn" class="md:hidden text-white p-2">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-zinc-900 border-t border-zinc-800 p-6 flex-col gap-4 shadow-2xl">
+            <a href="#home" class="mobile-link text-white text-lg font-medium">Início</a>
+            <a href="#modalidades" class="mobile-link text-white text-lg font-medium">Modalidades</a>
+            <a href="#sobre" class="mobile-link text-white text-lg font-medium">Sobre Nós</a>
+            <a href="#contato" class="mobile-link bg-orange-600 text-center py-3 rounded-lg text-white font-bold">Agendar Agora</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section com Efeito Parallax (bg-fixed) -->
+    <section id="home" class="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden bg-zinc-900">
+        <!-- Background Overlay -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10"></div>
+            <!-- bg-fixed adicionado aqui para o efeito Parallax -->
+            <div class="w-full h-full bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center bg-fixed opacity-60"></div>
+        </div>
+
+        <div class="container mx-auto px-4 md:px-6 relative z-20 grid md:grid-cols-2 gap-12 items-center">
+            
+            <!-- Coluna da Esquerda: Conteúdo de Texto -->
+            <div class="space-y-6 reveal active">
+                <div class="inline-block bg-orange-600/20 border border-orange-500/30 rounded-full px-4 py-1.5 backdrop-blur-sm">
+                    <span class="text-orange-400 font-bold text-xs md:text-sm uppercase tracking-widest flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-orange-500 animate-pulse"></span>
+                        Maior CT de Uberaba
+                    </span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-black text-white leading-[0.9] italic uppercase tracking-tighter">
+                    Conecte-se <br/>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Com Sua</span> <br/>
+                    Melhor Versão
+                </h1>
+                
+                <p class="text-zinc-300 text-lg md:text-xl max-w-lg leading-relaxed">
+                    Não é apenas treino, é um estilo de vida. Junte-se à comunidade que mais cresce em Uberaba. Cross, Musculação, Hyrox e muito mais em um só lugar.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <a href="#contato" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:-translate-y-1 shadow-xl shadow-orange-900/50 flex items-center justify-center gap-2 uppercase tracking-wide whitespace-nowrap">
+                        Começar Agora <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                    </a>
+                    <a href="#modalidades" class="bg-white/10 hover:bg-white/20 border border-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center uppercase tracking-wide whitespace-nowrap">
+                        Conhecer Planos
+                    </a>
+                </div>
+
+                <div class="pt-8 pb-4 flex items-center gap-6 text-zinc-400 text-sm">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="text-orange-500 w-5 h-5"></i> Equipamentos Premium
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="text-orange-500 w-5 h-5"></i> Coaches Certificados
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coluna da Direita (Vazia ou com imagem decorativa se desejar no futuro) -->
+            <div></div>
+
+        </div>
+    </section>
+
+    <!-- Modalidades -->
+    <section id="modalidades" class="py-24 bg-zinc-50">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16 reveal">
+                <h2 class="text-orange-600 font-bold tracking-widest uppercase mb-2">O que oferecemos</h2>
+                <h3 class="text-4xl md:text-5xl font-black text-zinc-900 italic uppercase tracking-tight">Treine do seu jeito</h3>
+                <p class="mt-4 text-zinc-600">Temos a modalidade perfeita para o seu objetivo, idade e nível de condicionamento.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards -->
+                <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-zinc-100 hover:border-orange-200 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-orange-500 opacity-10 rounded-bl-full transform translate-x-10 -translate-y-10 transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="dumbbell" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-zinc-900 mb-3 italic uppercase">Cross Training</h4>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">Alta intensidade e movimentos funcionais para condicionamento total.</p>
+                    <a href="#contato" class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition-colors uppercase text-sm tracking-wide">
+                        Saiba mais <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-zinc-100 hover:border-orange-200 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 opacity-10 rounded-bl-full transform translate-x-10 -translate-y-10 transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="users" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-zinc-900 mb-3 italic uppercase">Musculação</h4>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">Estrutura completa para hipertrofia e fortalecimento muscular.</p>
+                    <a href="#contato" class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition-colors uppercase text-sm tracking-wide">
+                        Saiba mais <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-zinc-100 hover:border-orange-200 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-500 opacity-10 rounded-bl-full transform translate-x-10 -translate-y-10 transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-yellow-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="bike" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-zinc-900 mb-3 italic uppercase">Spinning</h4>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">Queime calorias em aulas dinâmicas e cheias de energia.</p>
+                    <a href="#contato" class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition-colors uppercase text-sm tracking-wide">
+                        Saiba mais <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-zinc-100 hover:border-orange-200 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-red-600 opacity-10 rounded-bl-full transform translate-x-10 -translate-y-10 transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="timer" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-zinc-900 mb-3 italic uppercase">Hyrox</h4>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">A modalidade que combina corrida e exercícios funcionais.</p>
+                    <a href="#contato" class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition-colors uppercase text-sm tracking-wide">
+                        Saiba mais <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-zinc-100 hover:border-orange-200 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-green-500 opacity-10 rounded-bl-full transform translate-x-10 -translate-y-10 transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="baby" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-zinc-900 mb-3 italic uppercase">CT Kids</h4>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">Desenvolvimento motor e diversão para os pequenos.</p>
+                    <a href="#contato" class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition-colors uppercase text-sm tracking-wide">
+                        Saiba mais <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+
+                <div class="group bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-zinc-100 hover:border-orange-200 relative overflow-hidden reveal">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-500 opacity-10 rounded-bl-full transform translate-x-10 -translate-y-10 transition-transform group-hover:scale-150"></div>
+                    <div class="w-14 h-14 bg-purple-500 rounded-xl flex items-center justify-center text-white mb-6 shadow-lg transform group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="heart-pulse" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="text-2xl font-bold text-zinc-900 mb-3 italic uppercase">Melhor Idade 60+</h4>
+                    <p class="text-zinc-600 mb-6 leading-relaxed">Saúde, longevidade e acompanhamento especializado.</p>
+                    <a href="#contato" class="inline-flex items-center text-orange-600 font-bold hover:text-orange-700 transition-colors uppercase text-sm tracking-wide">
+                        Saiba mais <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre / Diferenciais -->
+    <section id="sobre" class="py-24 bg-zinc-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+             <div class="absolute top-10 left-10 w-72 h-72 bg-orange-600 rounded-full blur-[120px]"></div>
+             <div class="absolute bottom-10 right-10 w-96 h-96 bg-blue-600 rounded-full blur-[120px]"></div>
+        </div>
+
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+            <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="relative reveal">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-zinc-800 transform rotate-2 hover:rotate-0 transition-all duration-500">
+                        <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyOMnN5vCa0mguT5jSvTb8mseozue8UuJcdEmjqNl2xb4FdGv4JCsRJHfxfMIOH6-ni1ZoafrjJz7OMtrqTS1BejwcBkar4OtZKnnrv1j1USDkOtwdFnnAhlC4VkOmrg12MMbfUfg=s680-w680-h510-rw" alt="CT Conectados Fachada" class="w-full h-auto object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-8">
+                            <div>
+                                <p class="text-orange-400 font-bold uppercase tracking-widest text-sm mb-1">Localização</p>
+                                <p class="text-white font-bold text-xl">Uberaba, MG</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Badge -->
+                    <div class="absolute -bottom-6 -right-6 bg-white text-zinc-900 p-6 rounded-xl shadow-xl hidden md:block">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="flex text-yellow-500">
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                                <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            </div>
+                            <span class="font-bold text-xl">4.9/5</span>
+                        </div>
+                        <p class="text-sm text-zinc-500 font-medium">Avaliação dos alunos</p>
+                    </div>
+                </div>
+
+                <div class="space-y-8 reveal">
+                    <div>
+                        <h2 class="text-orange-500 font-bold tracking-widest uppercase mb-2">Por que nós?</h2>
+                        <h3 class="text-4xl md:text-5xl font-black italic uppercase tracking-tight mb-6">Mais que um CT,<br/>Uma Família.</h3>
+                        <p class="text-zinc-400 text-lg leading-relaxed">
+                            No CT Conectados, acreditamos que o esporte transforma vidas. Criamos um ambiente onde você se sente motivado a evoluir todos os dias, com suporte profissional e uma comunidade vibrante.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center shrink-0 text-orange-500 border border-zinc-700">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Comunidade Unida</h4>
+                                <p class="text-zinc-500">Eventos, competições internas e um ambiente acolhedor.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center shrink-0 text-orange-500 border border-zinc-700">
+                                <i data-lucide="zap"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-1">Metodologia Exclusiva</h4>
+                                <p class="text-zinc-500">Treinos periodizados para garantir sua evolução constante e segura.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato" class="py-24 bg-white">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="bg-zinc-900 rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row reveal">
+                
+                <div class="md:w-1/2 p-12 flex flex-col justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-orange-600 opacity-10 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-orange-500 to-transparent"></div>
+                    <div class="relative z-10 space-y-8">
+                        <div>
+                            <h3 class="text-3xl md:text-4xl font-black text-white italic uppercase mb-4">Sua 1ª aula é <span class="text-orange-500">Grátis!</span></h3>
+                            <p class="text-zinc-400 text-lg">
+                                Venha sentir a energia do CT Conectados. Preencha o formulário e nossa equipe entrará em contato.
+                            </p>
+                        </div>
+                        
+                        <!-- Links com Ações Funcionais (Revertido Layout) -->
+                        <div class="space-y-6">
+                            <!-- Telefone -->
+                            <div class="flex items-center gap-4 text-zinc-300 cursor-default group border-l-2 border-orange-500/0 hover:border-orange-500 pl-0 hover:pl-4 transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0 text-orange-500">
+                                    <i data-lucide="phone" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-zinc-500 uppercase tracking-widest font-bold">Telefone/WhatsApp</p>
+                                    <p class="text-white font-medium text-lg">(34) 9305-2222</p>
+                                </div>
+                            </div>
+
+                            <!-- Instagram -->
+                            <a href="https://www.instagram.com/ctconectados" target="_blank" class="flex items-center gap-4 text-zinc-300 group border-l-2 border-orange-500/0 hover:border-orange-500 pl-0 hover:pl-4 transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0 text-orange-500 group-hover:bg-orange-600 group-hover:text-white transition-colors">
+                                    <i data-lucide="instagram" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-zinc-500 uppercase tracking-widest font-bold">Siga nosso dia a dia</p>
+                                    <p class="text-white font-medium text-lg">@ctconectados</p>
+                                </div>
+                            </a>
+
+                            <!-- Endereço Texto -->
+                             <div class="flex items-start gap-4 text-zinc-300 cursor-default group border-l-2 border-orange-500/0 hover:border-orange-500 pl-0 hover:pl-4 transition-all">
+                                <div class="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center shrink-0 text-orange-500">
+                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-zinc-500 uppercase tracking-widest font-bold">Localização</p>
+                                    <p class="text-white font-medium text-sm leading-relaxed max-w-xs">Alameda Ver. Júlio César de Rezende, 84 - Boa Vista, Uberaba - MG</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md:w-1/2 bg-white p-12">
+                    <form id="contact-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-bold text-zinc-700 mb-1 uppercase tracking-wider">Nome Completo</label>
+                            <input type="text" id="nome" class="w-full px-4 py-3 rounded-lg bg-zinc-100 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all placeholder-zinc-400" placeholder="Seu nome" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-zinc-700 mb-1 uppercase tracking-wider">WhatsApp</label>
+                            <input type="tel" id="whatsapp" class="w-full px-4 py-3 rounded-lg bg-zinc-100 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all placeholder-zinc-400" placeholder="(34) 9305-2222" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-zinc-700 mb-1 uppercase tracking-wider">Modalidade de Interesse</label>
+                            <div class="relative">
+                                <select id="modalidade" class="w-full px-4 py-3 rounded-lg bg-zinc-100 border-transparent focus:bg-white focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all appearance-none cursor-pointer">
+                                    <option>Cross Training</option>
+                                    <option>Musculação</option>
+                                    <option>Spinning</option>
+                                    <option>Hyrox</option>
+                                    <option>CT Kids</option>
+                                    <option>60+</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-zinc-500">
+                                    <i data-lucide="chevron-down" class="w-4 h-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Botão com Ícone do WhatsApp -->
+                        <button type="submit" id="submit-btn" class="w-full bg-orange-600 hover:bg-orange-700 text-white font-black uppercase py-4 rounded-lg shadow-lg shadow-orange-500/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-2">
+                            Agendar Aula Experimental <i data-lucide="message-circle" class="w-5 h-5"></i>
+                        </button>
+                        <p class="text-center text-xs text-zinc-400 mt-4">
+                            Ao enviar, você será redirecionado para o WhatsApp.
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ (Perguntas Frequentes - Expandido) -->
+    <section id="faq" class="py-16 bg-zinc-50 border-t border-zinc-200">
+        <div class="container mx-auto px-4 md:px-6">
+            <h2 class="text-3xl font-black text-center text-zinc-900 italic uppercase mb-12 tracking-tight">Dúvidas Comuns</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 reveal">
+                    <h4 class="font-bold text-lg text-orange-600 mb-2 flex items-center gap-2">
+                        <i data-lucide="credit-card" class="w-5 h-5"></i> Aceitam Gympass (Wellhub) ou TotalPass?
+                    </h4>
+                    <p class="text-zinc-600">Sim! Aceitamos ambos. Consulte na recepção ou no app quais planos são aceitos para cada modalidade.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 reveal">
+                    <h4 class="font-bold text-lg text-orange-600 mb-2 flex items-center gap-2">
+                        <i data-lucide="help-circle" class="w-5 h-5"></i> Nunca treinei, posso começar?
+                    </h4>
+                    <p class="text-zinc-600">Com certeza! Nossos treinos são adaptados para todos os níveis, do iniciante ao avançado. Você terá acompanhamento constante dos coaches.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 reveal">
+                    <h4 class="font-bold text-lg text-orange-600 mb-2 flex items-center gap-2">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i> O que preciso levar para a aula?
+                    </h4>
+                    <p class="text-zinc-600">Venha com roupas leves (camiseta, shorts/legging) e tênis confortável. Traga sua garrafinha de água e muita disposição!</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 reveal">
+                    <h4 class="font-bold text-lg text-orange-600 mb-2 flex items-center gap-2">
+                        <i data-lucide="calendar" class="w-5 h-5"></i> Preciso agendar a experimental?
+                    </h4>
+                    <p class="text-zinc-600">Sim! O agendamento garante que teremos um coach disponível para te dar atenção exclusiva e te apresentar a estrutura.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 reveal">
+                    <h4 class="font-bold text-lg text-orange-600 mb-2 flex items-center gap-2">
+                        <i data-lucide="clock" class="w-5 h-5"></i> Quais os horários de funcionamento?
+                    </h4>
+                    <p class="text-zinc-600">Funcionamos de segunda a sexta das 06h às 21h, e aos sábados das 08h às 12h (horários sujeitos a alteração, consulte no WhatsApp).</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-zinc-100 reveal">
+                    <h4 class="font-bold text-lg text-orange-600 mb-2 flex items-center gap-2">
+                        <i data-lucide="wallet" class="w-5 h-5"></i> Quais as formas de pagamento?
+                    </h4>
+                    <p class="text-zinc-600">Aceitamos cartões de crédito, débito, PIX e temos planos mensais, trimestrais e anuais com descontos especiais.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nova Seção de Mapa Full-Width (Com cabeçalho em cima) -->
+    <section class="w-full relative bg-zinc-100">
+        <!-- Cabeçalho do Mapa (Acima do iframe) -->
+        <div class="container mx-auto px-4 py-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <h4 class="font-bold text-orange-600 uppercase tracking-widest text-sm mb-1 flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4"></i> Onde Estamos
+                    </h4>
+                    <h3 class="text-2xl font-black text-zinc-900">Venha nos visitar</h3>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="font-bold text-zinc-800">Alameda Ver. Júlio César de Rezende, 84</p>
+                    <p class="text-zinc-500 text-sm">Boa Vista, Uberaba - MG</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mapa Full Width -->
+        <div class="w-full h-96 relative bg-zinc-300">
+            <iframe 
+                src="https://maps.google.com/maps?q=Alameda+Ver.+Júlio+César+de+Rezende,+84+-+Boa+Vista,+Uberaba+-+MG&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                style="border:0;" 
+                allowfullscreen="" 
+                aria-hidden="false" 
+                tabindex="0"
+                class="filter grayscale hover:grayscale-0 transition-all duration-500">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Instagram Mock Feed (Novo) -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4 text-center">
+            <a href="https://www.instagram.com/ctconectados" target="_blank" class="inline-flex items-center gap-2 text-zinc-800 font-bold text-xl hover:text-orange-600 transition-colors mb-8">
+                <i data-lucide="instagram" class="w-6 h-6"></i> Siga @ctconectados
+            </a>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
+                <a href="https://www.instagram.com/ctconectados" target="_blank" class="block aspect-square bg-zinc-200 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="instagram" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/ctconectados" target="_blank" class="block aspect-square bg-zinc-200 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="instagram" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/ctconectados" target="_blank" class="block aspect-square bg-zinc-200 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1594882645126-14020914d58d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="instagram" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+                <a href="https://www.instagram.com/ctconectados" target="_blank" class="block aspect-square bg-zinc-200 overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Instagram 4" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="instagram" class="text-white w-8 h-8"></i>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-zinc-500 py-12 border-t border-zinc-800">
+        <div class="container mx-auto px-4 md:px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <!-- LOGO RODAPÉ ATUALIZADA -->
+                <img src="https://res.cloudinary.com/dgt5d9xfq/image/upload/v1769566000/logo_conectados_xg2mvy.webp" alt="CT Conectados Logo" class="h-10 w-auto object-contain drop-shadow">
+            </div>
+            <div class="text-sm text-center md:text-left">
+                <!-- Frase de efeito movida para cima com destaque -->
+                <p class="text-orange-600 font-black text-xl italic uppercase tracking-tighter mb-4 animate-pulse">Bora treinar?</p>
+                
+                <p>&copy; 2024 CT Conectados Uberaba. Todos os direitos reservados.</p>
+                <!-- CRÉDITOS DRAFT HUB ATUALIZADOS -->
+                <a href="#" class="flex items-center gap-1 group hover:text-zinc-800 transition-colors" title="DRAFT.HUB Tech Studio">
+                    <span>Dev by</span>
+                    <span class="font-sans font-black tracking-tight text-zinc-500 group-hover:text-zinc-300">DRAFT.HUB<span class="text-red-600">.</span></span>
+                </a>
+                <div class="mt-2">
+                    <button id="open-privacy" class="text-xs text-zinc-600 hover:text-zinc-400 transition-colors underline">Política de Privacidade</button>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <a href="https://www.instagram.com/ctconectados" target="_blank" class="hover:text-white transition-colors"><i data-lucide="instagram"></i></a>
+                <!-- Link do WhatsApp também no rodapé, caso a pessoa prefira clicar direto -->
+                <a href="https://wa.me/553493052222" target="_blank" class="hover:text-white transition-colors"><i data-lucide="message-circle"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÃO FLUTUANTE DO WHATSAPP (SEM PULO/BOUNCE) -->
+    <a href="https://wa.me/553493052222?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20aulas%20do%20CT%20Conectados." 
+       target="_blank"
+       class="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-2xl transition-all transform hover:scale-105 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+    </a>
+
+    <!-- Modal de Privacidade (Oculto por padrão) -->
+    <div id="privacy-modal" class="fixed inset-0 z-[60] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-8 relative shadow-2xl">
+            <button id="close-privacy" class="absolute top-4 right-4 text-zinc-400 hover:text-zinc-800 transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <h3 class="text-2xl font-bold text-zinc-900 mb-4">Política de Privacidade</h3>
+            <div class="text-sm text-zinc-600 space-y-4 max-h-[60vh] overflow-y-auto">
+                <p><strong>1. Coleta de Dados:</strong> Esta página coleta apenas as informações que você fornece voluntariamente no formulário de contato (nome, telefone e interesse) para iniciar uma conversa via WhatsApp.</p>
+                <p><strong>2. Armazenamento:</strong> Não mantemos um banco de dados próprio com suas informações neste site. Os dados são transmitidos diretamente para o aplicativo de mensagens.</p>
+                <p><strong>3. Cookies e Rastreamento:</strong> Utilizamos cookies de terceiros (como Google e Meta) apenas para fins de análise de tráfego e eficácia de anúncios. Ao continuar navegando, você concorda com este uso.</p>
+                <p><strong>4. Contato:</strong> Seus dados serão utilizados exclusivamente pela equipe do CT Conectados para responder à sua solicitação de aula experimental.</p>
+            </div>
+            <button id="close-privacy-btn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-3 rounded-lg mt-6 transition-colors">
+                Entendi e Fechar
+            </button>
+        </div>
     </div>
-    <video autoplay muted loop playsinline class="bg-video">
-      <source src="https://media.istockphoto.com/id/2028236559/pt/v%C3%ADdeo/health-fitness-and-exercise-with-couple-in-gym-for-workout-stretching-and-coaching-personal.mp4?s=mp4-640x640-is&k=20&c=a0KFyPKWZ3CH94TK-Bh28qF3VT68kAkNGtE9P6rRtTo=" type="video/mp4">
-    </video>
-  </header>
 
-  <section class="about">
-    <h2>Seja bem-vindo ao CT Conectados</h2>
-    <p>Transformamos saúde em estilo de vida. Aqui você encontra treinos para todas as idades, com acompanhamento profissional, inclusão, diversão e resultados reais.</p>
-  </section>
+    <!-- JavaScript simples para interatividade -->
+    <script>
+        // Inicializa ícones
+        lucide.createIcons();
 
-  <section class="preview">
-    <h3>Explore nossas categorias</h3>
-    <div class="preview-grid">
-      <div class="preview-card" style="background-color:#F8A10E">Funcionais</div>
-      <div class="preview-card" style="background-color:#8ECE42">Força & Desempenho</div>
-      <div class="preview-card" style="background-color:#18A1AA">Ritmo</div>
-      <div class="preview-card" style="background-color:#444">Kids & Melhor Idade</div>
-    </div>
-    <a href="modalidades.html" class="btn btn-tertiary">Conheça todas as modalidades →</a>
-  </section>
+        // Menu Mobile Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-	<section class="benefits">
-	  <h2>Por que escolher o CT Conectados?</h2>
-	  <ul class="benefit-list">
-		<li>✅ Aulas inclusivas para todas as idades</li>
-		<li>✅ Treinos personalizados e profissionais capacitados</li>
-		<li>✅ Ambiente acolhedor e motivador</li>
-		<li>✅ Turmas de Cross, Spinning, Hyrox, Kids e 60+</li>
-	  </ul>
-	</section>
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
 
-	<section class="para-todos">
-	  <h2>Do infantil ao melhor idade</h2>
-	  <p>Nossas modalidades são adaptadas para crianças, adultos e idosos. Comece no seu ritmo!</p>
-	  <img src="img/turmas.png" alt="Turmas diversas" />
-	</section>
+        // Fecha menu ao clicar em link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            });
+        });
 
-	<section class="depoimentos">
-	  <h2>Histórias reais de transformação</h2>
-	  <div class="depoimento-card">
-		<p>“Comecei com 60 anos e hoje me sinto com 40!”</p>
-		<span>– Dona Rita, aluna do 60+</span>
-	  </div>
-	  <div class="depoimento-card">
-		<p>“Meu filho adora as aulas kids, é pura diversão!”</p>
-		<span>– Carla, mãe do Lucas</span>
-	  </div>
-	</section>
+        // Modal de Privacidade
+        const modal = document.getElementById('privacy-modal');
+        const openBtn = document.getElementById('open-privacy');
+        const closeBtn = document.getElementById('close-privacy');
+        const closeBtnBottom = document.getElementById('close-privacy-btn');
 
-	<a href="https://wa.me/55SEUNUMERO?text=Olá,%20gostaria%20de%20agendar%20uma%20aula%20experimental%20no%20CT%20Conectados!" class="btn btn-primary">
-	  Quero agendar uma aula
-	</a>
+        function toggleModal() {
+            modal.classList.toggle('hidden');
+        }
 
+        openBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleModal();
+        });
+        closeBtn.addEventListener('click', toggleModal);
+        closeBtnBottom.addEventListener('click', toggleModal);
+        
+        // Fecha ao clicar fora
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) toggleModal();
+        });
 
-	<section class="espaco">
-	  <h2>Venha nos visitar</h2>
-	  <p>Estamos te esperando para sua aula experimental gratuita!</p>
-	  <iframe src="https://www.google.com/maps/embed?pb=SEU-CODIGO-MAPS" width="100%" height="250" style="border:0;" allowfullscreen></iframe>
-	</section>
+        // Navbar Scroll Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-black/95', 'shadow-lg', 'py-3');
+                navbar.classList.remove('py-5');
+            } else {
+                navbar.classList.remove('bg-black/95', 'shadow-lg', 'py-3');
+                navbar.classList.add('py-5');
+            }
+        });
 
+        // Lógica do Formulário (Envia para WhatsApp)
+        const form = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
 
-  <footer class="main-footer">
-    <p>&copy; 2025 CT Conectados — Todos os direitos reservados.</p>
-  </footer>
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Muda o texto do botão para dar feedback
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.innerHTML = `Abrindo WhatsApp... <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>`;
+            lucide.createIcons(); // Recria o ícone de loading
 
+            const nome = document.getElementById('nome').value;
+            const modalidade = document.getElementById('modalidade').value;
+            const whatsapp = document.getElementById('whatsapp').value;
+            
+            // Número do CT
+            const phone = "553493052222"; 
+            const text = `Olá! Meu nome é ${nome}, meu whatsapp é ${whatsapp}. Tenho interesse em ${modalidade} e gostaria de agendar uma aula experimental.`;
+            
+            // Pequeno delay para o usuário ver o feedback antes de abrir a aba
+            setTimeout(() => {
+                window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
+                submitBtn.innerHTML = originalBtnContent; // Volta ao normal
+                lucide.createIcons(); // Recria os ícones originais
+            }, 800);
+        });
+
+        // Script de Animação de Entrada (Scroll Reveal)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Ativar uma vez ao carregar para pegar elementos já visíveis
+        reveal();
+    </script>
 </body>
 </html>
